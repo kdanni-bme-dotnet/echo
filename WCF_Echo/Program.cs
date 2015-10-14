@@ -9,6 +9,11 @@ namespace WCF_Echo
     {
         static void Main(string[] args)
         {
+            System.Console.WriteLine("Echo ..");
+
+
+
+            System.Console.ReadKey();
         }
     }
 }
