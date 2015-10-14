@@ -17,16 +17,35 @@ namespace Echo_PersistentLayer
             string t2SmallConnectionString = ConnectionString();
             using (MySqlConnection conn = new MySqlConnection(t2SmallConnectionString))
             {
-                conn.Open();
-
-                using (T2SmallContext ctx = new T2SmallContext(conn, false))
+                // Create database if not exists
+                using (T2SmallContext contextDB = new T2SmallContext(conn, false))
                 {
-                    DebugEntity de = new DebugEntity();
-                    de.Msg = "Echo..";
+                    contextDB.Database.CreateIfNotExists();
+                }
 
-                    ctx.DebugEntities.Add(de);
+                conn.Open();
+                MySqlTransaction transaction = conn.BeginTransaction();
 
-                    ctx.SaveChanges();
+                try { 
+                    using (T2SmallContext ctx = new T2SmallContext(conn, false))
+                    {
+                        ctx.Database.Log = (string message) => { Console.WriteLine(message); };
+                        ctx.Database.UseTransaction(transaction);
+
+                        DebugEntity de = new DebugEntity();
+                        de.Msg = "Echo..";
+
+                        ctx.DebugEntities.Add(de);
+
+                        ctx.SaveChanges();
+                    }
+
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
                 }
             }
             Console.ReadKey();
@@ -40,7 +59,7 @@ namespace Echo_PersistentLayer
             pwd = Console.ReadLine();
 
 
-            var connectionString = "server=54.209.254.226;port=3306;database=dotnet;uid=dotnet;password="+pwd+";";
+            var connectionString = "server=54.209.254.226;port=3306;database=dotnet2;uid=dotnet;password="+pwd+ ";Persist Security Info=True;";
             return connectionString;
         }
     }
