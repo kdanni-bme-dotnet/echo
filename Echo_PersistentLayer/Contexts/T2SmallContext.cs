@@ -1,7 +1,8 @@
-﻿using Echo_PersistentLayer.Entities.Debug;
+﻿using Echo_PersistentLayer.Entities.Util;
 using MySql.Data.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -15,17 +16,16 @@ namespace Echo_PersistentLayer.Contexts
 
         public DbSet<DebugEntity> DebugEntities{ get; set; }
 
-        public T2SmallContext(String connectionString)
-            : base(connectionString)
+        public T2SmallContext(DbConnection existingConnection, bool contextOwnsConnection)
+            : base(existingConnection, contextOwnsConnection)
         {
 
 
         }
 
         public T2SmallContext()
+            : base()
         {
-
-
         }
     }
 }
