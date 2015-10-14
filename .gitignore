@@ -211,5 +211,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-#Config Sicrets
-appSecrets.config
+
+# My Ignore
+[eE]cho_[pP]ersistent[lL]ayer/app[sS]ecrets.config
