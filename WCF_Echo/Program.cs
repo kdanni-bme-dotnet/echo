@@ -13,7 +13,7 @@ namespace WCF_Echo
         {
             Console.WriteLine("Echo..");
 
-            Uri baseAddress = new Uri("http://localhost:8000/echo");
+            Uri baseAddress = new Uri("http://localhost:8085/echo");
             using (ServiceHost selfHost = new ServiceHost(typeof(EchoService), baseAddress))
             {
                 //selfHost.AddServiceEndpoint(typeof(EchoService), new BasicHttpBinding(), "EchoService");

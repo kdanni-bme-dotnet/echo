@@ -33,7 +33,7 @@ namespace Echo_PersistentLayer
                         ctx.Database.UseTransaction(transaction);
 
                         DebugEntity de = new DebugEntity();
-                        de.Msg = "Echo..";
+                        de.Msg = "Echo.." + DateTime.Now.ToString();
 
                         ctx.DebugEntities.Add(de);
 
