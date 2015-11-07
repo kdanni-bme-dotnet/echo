@@ -10,7 +10,15 @@ namespace UDP_Client
     {
         static void Main(string[] args)
         {
-            
+            using (MyUdpClient.UdpServiceClient client = new MyUdpClient.UdpServiceClient("UdpBinding_IUdpService"))
+            {
+                client.DoWork();
+                var d = new MyUdpClient.Datagram();
+                d.Message = "Hali!";
+                client.ProcessDatagram(d);
+
+                Console.Read();
+            }
         }
     }
 }
