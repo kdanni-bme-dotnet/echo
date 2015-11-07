@@ -17,7 +17,7 @@ namespace UDP_Service
 
         public void ProcessDatagram(Datagram datagram)
         {
-            Console.WriteLine("Datagram: " + datagram);
+            Console.WriteLine("Datagram: " + datagram.Message);
         }
     }
 }
